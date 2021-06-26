@@ -1,6 +1,6 @@
 const mongoose = require( 'mongoose' );
 
-// Mongo Connection Class
+// Mongoose Connection Class
 class Connection {
     constructor() {
         const url = process.env.URI_MONGO;

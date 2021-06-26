@@ -1,6 +1,6 @@
 const User = require('../models/user');
 
-checkDuplicateUsernameOrEmail = (req, res, next) => {
+check_duplicates = (req, res, next) => {
 
     // Username
     User.findOne({
@@ -36,7 +36,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
 
 
 const verify_signup = {
-    checkDuplicateUsernameOrEmail
+    check_duplicates
 };
 
-module.exports = verify_signup
+module.exports = verify_signup;

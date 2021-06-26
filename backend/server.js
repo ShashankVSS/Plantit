@@ -11,11 +11,16 @@ var corsOptions = {
     origin: "http://localhost:8081"
 };
 
+app.use(express.json());
 app.use(cors(corsOptions));
 require('./routes/user')(app);
 require('./routes/auth')(app);
 
-
+// set port, listen for requests
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
 
 
 

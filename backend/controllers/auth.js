@@ -6,7 +6,7 @@ var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
     const user = new User({
-        username: req.body.username,
+        name: req.body.username,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8)
     });
@@ -17,12 +17,13 @@ exports.signup = (req, res) => {
             return;
         }
     });
+    res.status(200).send({message: "User registered successfully."});
 
 };
 
 exports.signin = (req, res) => {
     User.findOne({
-        username: req.body.username
+        email: req.body.email
     }).exec((err, user) => {
         if (err) {
             res.status(500).send({ message: err });
@@ -47,7 +48,7 @@ exports.signin = (req, res) => {
 
         var token = jwt.sign({ id: user.id }, config.secret, {
             expiresIn: 86400 // 24 hours
-        });
+        });      
 
         res.status(200).send({
             id: user._id,
