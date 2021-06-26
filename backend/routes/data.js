@@ -1,5 +1,6 @@
 const auth_jwt = require("../middlewares/auth_jwt");
 const Photos = require('../models/photos');
+const Party = require('../models/party');
 const { v1: uuidv1 } = require('uuid');
 
 module.exports = function (app, blob_client) {
@@ -91,11 +92,17 @@ module.exports = function (app, blob_client) {
                         user: req.user_id
                     });
 
+                    const party = new Party({
+                        name: "Kitty Party",
+                        photos: data._id
+                    });                    
+
                     data.save((err, data) => {
-                        if (err) {
-                            return res.status(500).send({ message: err });
+                        if (err) {                            
+                            return res.status(500).send({ message: err });                            
                         }
                         else {
+                            party.save((a,b)=>{});
                             return res.status(200).send({ message: "Data uploaded successfully." });
                         }
                     });
