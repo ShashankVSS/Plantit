@@ -6,9 +6,14 @@ const image_schema = new mongoose.Schema({
     required: true
   },
   user: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true
   },  
+  imagePath: {
+    tpye: String,
+    required: false
+  },
   date: {
     type: Date,
     default: Date.now
