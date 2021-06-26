@@ -1,7 +1,9 @@
 import React from 'react';
 import './index.css';
-
-import mapboxgl from '!mapbox-gl';
+import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu'
+import mapboxgl from 'mapbox-gl';
+import logo from './imgs/logo.png';
  
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2hyaWtiIiwiYSI6ImNrcWRneW0xMDA4MHEyb3F2aGk5Mmpib2YifQ.9zMxUjgU0Vx5GXgh9FhFuA';
 
@@ -31,7 +33,17 @@ class Home extends React.Component {
 	render() {
 		return(
       		<div>
-				
+				<AppBar position="static">
+					<Toolbar>
+						<IconButton edge="start" color="inherit" aria-label="menu">
+							<MenuIcon />
+						</IconButton>
+						<Typography variant="h6" >
+							Home
+						</Typography>
+						<img src="logo"/>
+					</Toolbar>
+				</AppBar>
                 <div ref={this.mapContainer} className="map-container" />
 
 			</div>
@@ -39,3 +51,4 @@ class Home extends React.Component {
 	}
 };
 
+export default Home;

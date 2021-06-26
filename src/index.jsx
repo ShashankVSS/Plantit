@@ -7,6 +7,7 @@ import './index.css';
 import Login from './login';
 import Register from './register';
 import logo from './imgs/logo.png';
+import Home from './home';
 
 const theme = createMuiTheme({
 	palette: {
@@ -22,14 +23,14 @@ const theme = createMuiTheme({
 class App extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {page: 'load'};
+		this.state = {page: 'home'};
 
 		this.setPage = this.setPage.bind(this);
 		this.login = this.login.bind(this);
 	}
 
 	componentDidMount() {
-		setTimeout(() => this.setState({page: 'login'}), 600);
+		setTimeout(() => this.setState({page: 'home'}), 600);
 	}
 
 	setPage(page) {
@@ -53,6 +54,7 @@ class App extends React.Component {
 				</div>}
 				{ this.state.page === 'login' && <Login setPage={this.setPage} login={this.login}/> }
 				{ this.state.page === 'register' && <Register setPage={this.setPage} /> }
+        { this.state.page === 'home' && <Home setPage={this.setPage} /> }
 			</MuiThemeProvider>
 		);
 	}
