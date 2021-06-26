@@ -1,6 +1,6 @@
 const auth_jwt = require("../middlewares/auth_jwt");
 const Photos = require('../models/photos');
-const { v1: uuidv1} = require('uuid');
+const { v1: uuidv1 } = require('uuid');
 
 module.exports = function (app, blob_client) {
 
@@ -20,27 +20,26 @@ module.exports = function (app, blob_client) {
 
         else {
 
-            const image_data = req.body.image_data;            
+            const image_data = req.body.image_data;
 
             // Create a unique name for the blob
-            const blobName = 'image' + uuidv1() + '.png';
+            const blobName = uuidv1() + '.png';
             // Get a block blob client
             const blockBlobClient = blob_client.getBlockBlobClient(blobName);
-            
-            const uploadBlobResponse = blockBlobClient.upload(image_data, image_data.length).then((a,b)=>{
-                
-                console.log(a);
-                console.log(b);
+
+            const uploadBlobResponse = blockBlobClient.upload(image_data, image_data.length).then((a, b) => {
+
+                console.log(blockBlobClient);
 
                 const data = new Photos({
                     data: req.body.data,
                     user: req.user,
-                    imagePath: "imagePath",
+                    imagePath: image_data,
                     latitude: req.body.latitude,
                     longitude: req.body.longitude,
                     user: req.user_id
                 });
-    
+
                 data.save((err, data) => {
                     if (err) {
                         return res.status(500).send({ message: err });
@@ -53,7 +52,7 @@ module.exports = function (app, blob_client) {
             });
             console.log("Blob was uploaded successfully. requestId: ", uploadBlobResponse);
 
-            
+
         }
 
     });
