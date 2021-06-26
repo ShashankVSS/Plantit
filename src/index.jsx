@@ -30,7 +30,11 @@ const theme = createMuiTheme({
 class App extends React.Component {
 	constructor(props) {
 		super(props);
+<<<<<<< Updated upstream
 		this.state = { page: 'load' };
+=======
+		this.state = {page: 'load', token: ''};
+>>>>>>> Stashed changes
 
 		this.setPage = this.setPage.bind(this);
 		this.login = this.login.bind(this);
@@ -45,6 +49,7 @@ class App extends React.Component {
 	}
 
 	async login(state) {
+<<<<<<< Updated upstream
 		// const json = await ky.post('http://localhost:3002/api/auth/signin', {
 		// 	json: {email: 'no', password: 'no'},
 		// 	timeout: 3000
@@ -60,6 +65,37 @@ class App extends React.Component {
 		}).then(data => console.log(data));
 
 		// console.log(json);
+=======
+		fetch('http://127.0.0.1:3000/api/auth/signin', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({email: state.email, password: state.pass})
+		})
+		.then(response => response.json())
+		.then(result => {
+			if (result.id) {
+				this.setState({token: result.token, page: 'home'});
+			}
+		});
+	}
+
+	async register(state) {
+		fetch('http://127.0.0.1:3000/api/auth/signi', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({email: state.email, password: state.pass})
+		})
+		.then(response => response.json())
+		.then(result => {
+			if (result.id) {
+				this.setState({token: result.token, page: 'home'});
+			}
+		});
+>>>>>>> Stashed changes
 	}
 
 	render() {

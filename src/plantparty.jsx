@@ -1,8 +1,12 @@
 import React from 'react';
-import { Select, Button, MenuItem } from '@material-ui/core'
+import { Select, Button, MenuItem, Typography } from '@material-ui/core'
 import './plantparty.css';
 import NavDrawer from './navDrawer';
 import mapboxgl from 'mapbox-gl';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
 class Party extends React.Component {
 	constructor(props) {
@@ -24,21 +28,28 @@ class Party extends React.Component {
 	render() {
 		return(
       		<div id="plantparty">
-				<NavDrawer></NavDrawer>
+				<NavDrawer page="Join Party" setPage = {this.props.setPage}></NavDrawer>
 				<div className="partyCard">
 
-                    <label for="parties">Join Planting Party</label>
+                    <Typography for="parties">Join Planting Party</Typography>
 
-                    <Select name="parties" id="partyDrop">
-                        <MenuItem>Default</MenuItem>
-                    </Select>
+					<FormControl className="partyoptions">
+						<InputLabel htmlFor="age-native-simple">Available Planting Parties</InputLabel>
+						<Select
+							onChange=""
+							>
+							<option aria-label="None" value="" />
+							<option value={10}>Ten</option>
+							<option value={20}>Twenty</option>
+							<option value={30}>Thirty</option>
+						</Select>
+					</FormControl>
 
-
-                    <div ref={this.mapContainer} className="map-container" />
+                    <div ref={this.mapContainer} className="map-container2" />
 
                 </div>
 
-                <Button>Submit</Button>
+                <Button className="joinparty" variant="contained" size="large" color="primary" onClick={() => this.props.setPage('store')}> Submit </Button>
 			</div>
 		);
 	}

@@ -1,7 +1,8 @@
 #photos {
-    background: url('imgs/loginbg.png');
+    background: url('imgs/bg.png');
     background-size: cover;
     height: 100vh;
+    background-position: 55%;
 }
 
 #photos-card {
@@ -9,4 +10,36 @@
 	border-radius: 16px;
     margin: 20px 16px;
     padding: 30px;
+    height: 70%;
+}
+
+.joinparty {
+    width: calc(100% - 24px);
+	margin: 40px 12px !important;
+}
+
+.photodesc {
+    margin-bottom: 10px !important;
+}
+
+.imageSelect {
+    margin: 10px 0px !important;
+}
+
+.instgif {
+    width: 100%
+}
+
+.instgif img {
+    max-width: 100%;
+}
+
+.dialogCont {
+    text-align: center;
+}
+
+.map-container3 {
+    height: 150px !important;
+    width: calc(100% - 12px);
+    padding: 10px 6px;
 }

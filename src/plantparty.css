@@ -2,6 +2,7 @@
     background: url('imgs/bg.png');
     background-size: cover;
     height: 100vh;
+    background-position: 35%;
 }
 
 .partyCard {
@@ -10,4 +11,20 @@
     margin: 20px 16px;
     padding: 30px;
     height: 70%;
+}
+
+.partyoptions {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.map-container2 {
+    height: 420px;
+    width: calc(100% - 12px);
+    padding: 24px 6px;
+}
+
+.joinparty {
+    width: calc(100% - 24px);
+	margin: 40px 12px !important;
 }

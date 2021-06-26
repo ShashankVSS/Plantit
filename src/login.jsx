@@ -32,7 +32,7 @@ class Login extends React.Component {
 						<TextField variant="outlined" label="Password" margin="normal" onChange={this.updatePass}/>
 						<Divider className="divider"/>
 						<Button variant="contained" size="large" color="primary" fullWidth onClick={() => this.props.login(this.state)}>Login</Button>
-						<Typography onClick={() => this.props.setPage('home')}>
+						<Typography onClick={() => this.props.setPage('register')}>
 							<Link underline="always" className="link">Don't have an account?</Link>
 						</Typography>
 					</div>

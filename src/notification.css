@@ -1,5 +1,6 @@
-#home {
+#notification {
 	background: url('imgs/bg.png');
 	background-size: cover;
 	height: 100vh;
+	background-position: 35%;
 }
