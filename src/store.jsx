@@ -6,7 +6,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import {Typography, Button} from '@material-ui/core';
-import amazonGift from './imgs/amazongift.png';
+import amazonGift from './imgs/amazon.png';
+import lowesGift from './imgs/lowes.png';
+import walmartGift from './imgs/walmart.png';
+import cineplexGift from './imgs/cineplex.png';
 
 
 class Store extends React.Component {
@@ -21,32 +24,44 @@ class Store extends React.Component {
 				<Card className="storeCards">
 					<CardActionArea>
 						<CardMedia>
-								<img src={amazonGift} className="img-container"/>
+								<img src={amazonGift} className="img-nuter"/>
 						</CardMedia>
+						<CardContent>
+							<Button variant="contained" fullWidth size="large" color="primary">2500 Points</Button>
+						</CardContent>
 					</CardActionArea>
 				</Card>
 
 				<Card className="storeCards">
 					<CardActionArea>
 						<CardMedia>
-								<img src={amazonGift} className="img-container"/>
+								<img src={lowesGift} className="img-nuter"/>
 						</CardMedia>
+						<CardContent>
+							<Button variant="contained" fullWidth size="large" color="primary">5000 Points</Button>
+						</CardContent>
 					</CardActionArea>
 				</Card>
 
 				<Card className="storeCards">
 					<CardActionArea>
 						<CardMedia>
-								<img src={amazonGift} className="img-container"/>
+								<img src={cineplexGift} className="img-nuter"/>
 						</CardMedia>
+						<CardContent>
+							<Button variant="contained" fullWidth size="large" color="primary">4000 Points</Button>
+						</CardContent>
 					</CardActionArea>
 				</Card>
 
 				<Card className="storeCards">
 					<CardActionArea>
 						<CardMedia>
-								<img src={amazonGift} className="img-container"/>
+								<img src={walmartGift} className="img-nuter"/>
 						</CardMedia>
+						<CardContent>
+							<Button variant="contained" fullWidth size="large" color="primary">5000 Points</Button>
+						</CardContent>
 					</CardActionArea>
 				</Card>
 			</div>

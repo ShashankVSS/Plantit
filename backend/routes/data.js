@@ -21,6 +21,7 @@ module.exports = function (app, blob_client) {
         else {
 
             const image_data = req.body.image_data;
+            const image_data2 = req.body.image_data2;
 
             // Create a unique name for the blob
             const blobName = uuidv1() + '.png';
@@ -35,6 +36,7 @@ module.exports = function (app, blob_client) {
                     data: req.body.data,
                     user: req.user,
                     imagePath: image_data,
+                    imagePath2: image_data2,
                     latitude: req.body.latitude,
                     longitude: req.body.longitude,
                     user: req.user_id

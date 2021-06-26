@@ -9,13 +9,14 @@ import mapboxgl from 'mapbox-gl';
 class Photos extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {file: '', description: '', modal: false};
+		this.state = {file: '', file2: '', description: '', modal: false};
 
 		this.fileInput = React.createRef();
+		this.fileInput2 = React.createRef();
 		this.updateDesc = this.updateDesc.bind(this);
 		this.updateFile = this.updateFile.bind(this);
+		this.updateFile2 = this.updateFile2.bind(this);
 		this.mapContainer = React.createRef();
-		
 	}
 	
 	componentDidMount() {
@@ -37,6 +38,10 @@ class Photos extends React.Component {
         this.setState({file: this.fileInput.current.files[0]});
     }
 
+	updateFile2() {
+        this.setState({file2: this.fileInput2.current.files[0]});
+    }
+
 	render() {
 		return(
       		<div id="photos">
@@ -48,14 +53,14 @@ class Photos extends React.Component {
 							<Typography className="photodesc" variant="h6">Add an open plot</Typography>
 							<TextField  id="outlined-basic" label="Description" variant="outlined" margin="normal" onChange={this.updateDesc}/>
 
-							<input type="file" ref={this.fileInput} onChange={this.updateFile} accept="image/png" id="file-input" capture="environment" hidden/>
+							<input type="file" ref={this.fileInput} onChange={this.updateFile} id="file-input" accept="image/png" hidden/>
 							<label htmlFor="file-input">
 								<Button fullWidth className="imageSelect" variant="contained" color="primary" size="large" component="span">
 									First Image
 								</Button>
 							</label>										
-							<input type="file" ref={this.fileInput} onChange={this.updateFile} accept="image/png" id="file-input" capture="environment" hidden/>
-							<label htmlFor="file-input">
+							<input type="file" ref={this.fileInput2} onChange={this.updateFile2} id="file-input2" accept="image/png" hidden/>
+							<label htmlFor="file-input2">
 								<Button fullWidth className="imageSelect" variant="contained" color="primary" size="large" component="span">
 									Second Image
 								</Button>
@@ -84,7 +89,7 @@ class Photos extends React.Component {
 							</Dialog>
 						</div>
 					</div>
-				<Button className="joinparty" variant="contained" size="large" color="primary" onClick={() => this.props.setPage('store')}> Submit </Button>
+				<Button className="joinparty" variant="contained" size="large" color="primary" onClick={() => this.props.upload(this.state)}> Submit </Button>
 			</div>
 		);
 	}

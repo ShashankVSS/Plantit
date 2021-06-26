@@ -26,6 +26,15 @@ const theme = createMuiTheme({
 	}
 });
 
+function getBase64(file) {
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = () => resolve(reader.result);
+		reader.onerror = error => reject(error);
+	});
+}
+
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -34,6 +43,7 @@ class App extends React.Component {
 		this.setPage = this.setPage.bind(this);
 		this.login = this.login.bind(this);
 		this.register = this.register.bind(this);
+		this.upload = this.upload.bind(this);
 	}
 
 	componentDidMount() {
@@ -55,7 +65,6 @@ class App extends React.Component {
 		})
 		.then(response => response.json())
 		.then(result => {
-			console.log(result);
 			if (result.id) {
 				this.setState({token: result.token, page: 'home'});
 			}
@@ -79,20 +88,15 @@ class App extends React.Component {
 	}
 
 	async upload(state) {
-		var canvas = document.getElementById('canvas');
-		var ctx = canvas.getContext('2d');
-		canvas.width = state.file.width;
-		canvas.height = state.file.height;
-
-		ctx.drawImage(state.file, 0, 0);
-
+   		const base64 = await getBase64(state.file);
+		console.log(base64);
 		fetch(`http://${window.location.hostname}:3000/api/data/upload`, {
 			method: 'POST',
 			headers: {
 				'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZDZmNmNiNzhhZjEyMWNjYzE5NDdlOCIsImlhdCI6MTYyNDcwMDgzOCwiZXhwIjoxNjI0Nzg3MjM4fQ.JnlN96kz0JbTgMnC2DJNSv-RHgLjC_RPkTtQpnowJlM',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({data: '', img_data: '', latittude: '', longitude: ''})
+			body: JSON.stringify({data: '1', image_data: base64, image_data2: '1', latitude: '1', longitude: '1'})
 		})
 		.then(response => response.json())
 		.then(result => {
@@ -116,7 +120,7 @@ class App extends React.Component {
 				{ this.state.page === 'register' && <Register setPage={this.setPage} register={this.register}/> }
         		{ this.state.page === 'home' && <Home setPage={this.setPage} /> }
 				{ this.state.page === 'notification' && <Notification setPage={this.setPage} /> }
-				{ this.state.page === 'photos' && <Photos setPage={this.setPage} /> }
+				{ this.state.page === 'photos' && <Photos setPage={this.setPage} upload={this.upload}/> }
 				{ this.state.page === 'planparty' && <PlanParty setPage={this.setPage} /> }
 				{ this.state.page === 'profile' && <Profile setPage={this.setPage} /> }
 				{ this.state.page === 'store' && <Store setPage={this.setPage} /> }

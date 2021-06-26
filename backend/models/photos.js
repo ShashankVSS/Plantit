@@ -14,9 +14,13 @@ const image_schema = new mongoose.Schema({
     type: String,
     required: true
   },
-  latitude: {
+  imagePath2: {
     type: String,
     required: true
+  },
+  latitude: {
+    type: String,
+    required: false
   },
   longitude: {
     type: String,
