@@ -45,23 +45,8 @@ class App extends React.Component {
 	}
 
 	async login(state) {
-		fetch('http://127.0.0.1:3000/api/auth/signin', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({email: state.email, password: state.pass})
-		})
-		.then(response => response.json())
-		.then(result => {
-			if (result.id) {
-				this.setState({token: result.token, page: 'home'});
-			}
-		});
-	}
-
-	async register(state) {
-		fetch('http://127.0.0.1:3000/api/auth/signup', {
+		console.log();
+		fetch(`http://${window.location.hostname}:3000/api/auth/signin`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -72,8 +57,38 @@ class App extends React.Component {
 		.then(result => {
 			console.log(result);
 			if (result.id) {
-				//this.setState({token: result.token, page: 'login'});
+				this.setState({token: result.token, page: 'home'});
 			}
+		});
+	}
+
+	async register(state) {
+		fetch(`http://${window.location.hostname}:3000/api/auth/signup`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({email: state.email, password: state.pass})
+		})
+		.then(response => response.json())
+		.then(result => {
+			if (result.message == 'User registered successfully.') {
+				this.setState({page: 'login'});
+			}
+		});
+	}
+
+	async upload(state) {
+		fetch(`http://${window.location.hostname}:3000/api/data/upload`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({})
+		})
+		.then(response => response.json())
+		.then(result => {
+			console.log(result);
 		});
 	}
 	

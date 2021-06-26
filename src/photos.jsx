@@ -37,13 +37,10 @@ class Photos extends React.Component {
         this.setState({file: this.fileInput.current.files[0]});
     }
 
-
 	render() {
 		return(
       		<div id="photos">
-				
 				<NavDrawer page="Photos" setPage = {this.props.setPage}/>
-
 				<div id="photos-card">
 						<Card class="card">
 
