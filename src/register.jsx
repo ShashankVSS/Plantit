@@ -36,7 +36,11 @@ class Register extends React.Component {
 					<TextField variant="outlined" label="Password" margin="normal" onChange={this.updatePass}/>
 					<TextField variant="outlined" label="Verify Password" margin="normal" onChange={this.updateVerPas} error={!this.state.veriPass}/>
 					<Divider className="divider"/>
-					<Button variant="contained" fullWidth size="large" color="primary" disabled={!this.state.veriPass}>Register</Button>
+					<Button variant="contained" fullWidth size="large" color="primary" disabled={!this.state.veriPass}
+						onClick={() => this.props.register(this.state)}
+					>
+						Register
+					</Button>
 					<Typography onClick={() => this.props.setPage('login')}>
 						<Link underline="always" className="link">Already have an account?</Link>
 					</Typography>
