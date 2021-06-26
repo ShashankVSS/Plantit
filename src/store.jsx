@@ -9,7 +9,7 @@ import {Typography, Button} from '@material-ui/core';
 import amazonGift from './imgs/amazon.png';
 import lowesGift from './imgs/lowes.png';
 import walmartGift from './imgs/walmart.png';
-import cineplexGift from './imgs/cineplex.png';
+import cineplexGift from './imgs/cinplex.jpg';
 
 
 class Store extends React.Component {
