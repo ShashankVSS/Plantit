@@ -40,20 +40,21 @@ class Photos extends React.Component {
 	render() {
 		return(
       		<div id="photos">
+				<canvas id="canvas" hidden></canvas>
 				<NavDrawer page="Photos" setPage = {this.props.setPage}/>
-				<div id="photos-card">
+					<div id="photos-card">
 						<Card class="card">
 
 							<Typography className="photodesc" variant="h6">Add an open plot</Typography>
 							<TextField  id="outlined-basic" label="Description" variant="outlined" margin="normal" onChange={this.updateDesc}/>
 
-							<input type="file" ref={this.fileInput} onChange={this.updateFile} accept="image/*" id="file-input" capture="environment" hidden/>
+							<input type="file" ref={this.fileInput} onChange={this.updateFile} accept="image/png" id="file-input" capture="environment" hidden/>
 							<label htmlFor="file-input">
 								<Button fullWidth className="imageSelect" variant="contained" color="primary" size="large" component="span">
 									First Image
 								</Button>
 							</label>										
-							<input type="file" ref={this.fileInput} onChange={this.updateFile} accept="image/*" id="file-input" capture="environment" hidden/>
+							<input type="file" ref={this.fileInput} onChange={this.updateFile} accept="image/png" id="file-input" capture="environment" hidden/>
 							<label htmlFor="file-input">
 								<Button fullWidth className="imageSelect" variant="contained" color="primary" size="large" component="span">
 									Second Image
@@ -61,7 +62,6 @@ class Photos extends React.Component {
 							</label>										
 							<div ref={this.mapContainer} className="map-container3" />
 						</Card>
-
 						<div>
 							<Button className="joinparty" variant="contained" size="large" color="primary" onClick={() => this.setState({modal:true})}>
 								Instructions
@@ -83,8 +83,7 @@ class Photos extends React.Component {
 								</DialogContent>
 							</Dialog>
 						</div>
-						
-				</div>
+					</div>
 				<Button className="joinparty" variant="contained" size="large" color="primary" onClick={() => this.props.setPage('store')}> Submit </Button>
 			</div>
 		);

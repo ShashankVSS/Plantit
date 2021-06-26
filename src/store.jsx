@@ -18,6 +18,13 @@ class Store extends React.Component {
 		return(
       		<div id='store'>
 			<NavDrawer page="Store" setPage={this.props.setPage}/>
+				<Card className="storeCards">
+					<CardActionArea>
+						<CardMedia>
+								<img src={amazonGift} className="img-container"/>
+						</CardMedia>
+					</CardActionArea>
+				</Card>
 
 				<Card className="storeCards">
 					<CardActionArea>
@@ -27,6 +34,21 @@ class Store extends React.Component {
 					</CardActionArea>
 				</Card>
 
+				<Card className="storeCards">
+					<CardActionArea>
+						<CardMedia>
+								<img src={amazonGift} className="img-container"/>
+						</CardMedia>
+					</CardActionArea>
+				</Card>
+
+				<Card className="storeCards">
+					<CardActionArea>
+						<CardMedia>
+								<img src={amazonGift} className="img-container"/>
+						</CardMedia>
+					</CardActionArea>
+				</Card>
 			</div>
 		);
 	}

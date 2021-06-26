@@ -79,12 +79,20 @@ class App extends React.Component {
 	}
 
 	async upload(state) {
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		canvas.width = state.file.width;
+		canvas.height = state.file.height;
+
+		ctx.drawImage(state.file, 0, 0);
+
 		fetch(`http://${window.location.hostname}:3000/api/data/upload`, {
 			method: 'POST',
 			headers: {
+				'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZDZmNmNiNzhhZjEyMWNjYzE5NDdlOCIsImlhdCI6MTYyNDcwMDgzOCwiZXhwIjoxNjI0Nzg3MjM4fQ.JnlN96kz0JbTgMnC2DJNSv-RHgLjC_RPkTtQpnowJlM',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({})
+			body: JSON.stringify({data: '', img_data: '', latittude: '', longitude: ''})
 		})
 		.then(response => response.json())
 		.then(result => {
