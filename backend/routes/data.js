@@ -12,6 +12,44 @@ module.exports = function (app, blob_client) {
         next();
     });
 
+    app.get('/api/data/get_by_user', [auth_jwt.verifyToken], (req, res) => {
+
+        var user = req.user_id;
+
+        Photos.find({
+            "user": user
+        }, (err, docs) => {
+
+            if (!err) {
+                console.log(docs);
+                return res.status(200).send(docs);
+            }
+            else {
+                return res.status(400).send({message: "An error occured"});
+            }
+
+        });
+
+    });
+    
+    app.get('/api/data/get_all', [auth_jwt.verifyToken], (req, res) => {
+        
+
+        Photos.find({            
+        }, (err, docs) => {
+
+            if (!err) {
+                console.log(docs);
+                return res.status(200).send(docs);
+            }
+            else {
+                return res.status(400).send({message: "An error occured"});
+            }
+
+        });
+
+    });
+
     app.post("/api/data/upload", [auth_jwt.verifyToken], (req, res) => {
 
         if (!req.body.image_data) {
@@ -20,7 +58,7 @@ module.exports = function (app, blob_client) {
 
         else {
 
-            const image_data = req.body.image_data;
+            var image_data = req.body.image_data;
             const image_data2 = req.body.image_data2;
 
             // Create a unique name for the blob
@@ -28,7 +66,10 @@ module.exports = function (app, blob_client) {
             // Get a block blob client
             const blockBlobClient = blob_client.getBlockBlobClient(blobName);
 
-            const uploadBlobResponse = blockBlobClient.upload(image_data, image_data.length).then((a, b) => {
+            var new_data = image_data.replace(/^data:image\/(png|jpg);base64,/, "");
+            let buff = Buffer.from(new_data, 'base64');
+
+            const uploadBlobResponse = blockBlobClient.upload(buff, buff.length).then((a, b) => {
 
                 console.log(blockBlobClient);
 
