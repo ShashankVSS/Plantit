@@ -3,7 +3,6 @@ require('dotenv').config({ path: './.env' });
 require('./util/db');
 
 const express = require('express');
-const fileUpload = require('express-fileupload');
 const app = express();
 const cors = require('cors');
 const blob_client = require('./util/blob')();
@@ -16,10 +15,6 @@ app.use(cors());
 require('./routes/user')(app);
 require('./routes/auth')(app);
 require('./routes/data')(app, blob_client);
-
-
-// default options
-app.use(fileUpload());
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
