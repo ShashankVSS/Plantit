@@ -23,6 +23,29 @@ class Home extends React.Component {
 			zoom: zoom,
 			attributionControl: false
         });
+
+		let all;
+		this.props.getAll().then(points => {
+			all = points;
+		});
+
+		map.on('load', () => {
+			if (all) {
+				all.forEach(marker => {
+				new mapboxgl.Marker()
+					.setLngLat([parseInt(marker.longitude), parseInt(marker.latitude)])
+					.setPopup(
+					new mapboxgl.Popup({ offset: 25 }) // add popups
+						.setHTML(
+							'<h3>' +
+							marker.data +
+							'</h3>'
+						)
+					)
+					.addTo(map);
+				});
+			}
+		});
     }
 
 	toggleDrawer(open) {

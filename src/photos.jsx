@@ -9,7 +9,7 @@ import mapboxgl from 'mapbox-gl';
 class Photos extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {file: '', file2: '', description: '', modal: false};
+		this.state = {file: '', file2: '', lat: '', lon: '', lat2: '', lon2: '', description: '', modal: false};
 
 		this.fileInput = React.createRef();
 		this.fileInput2 = React.createRef();
@@ -28,19 +28,28 @@ class Photos extends React.Component {
 			zoom: zoom,
 			attributionControl: false
         });
+		
     }
 
 	updateDesc(e) {
 		this.setState({description: e.target.value});
 	}
 	
-	updateFile() {
-        this.setState({file: this.fileInput.current.files[0]});
+	async updateFile() {
+        var osod = await this.geolocate();
+		this.setState({file: this.fileInput.current.files[0], lat: osod.coords.latitude, lon: osod.coords.longitude});
     }
 
-	updateFile2() {
-        this.setState({file2: this.fileInput2.current.files[0]});
+	async updateFile2() {
+		var osod = await this.geolocate();
+        this.setState({file2: this.fileInput2.current.files[0], lat2: osod.coords.latitude, lon2: osod.coords.longitude});
     }
+
+	geolocate() {
+		return new Promise((res, rej) => {
+			navigator.geolocation.getCurrentPosition(res, rej, {enableHighAccuracy: true});
+		});
+	}
 
 	render() {
 		return(

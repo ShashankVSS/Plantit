@@ -18,8 +18,10 @@
 	height: 150px;
 	width: 90%;
     border-radius: 10px;
-    translate: 5%;
-    margin-top: 15px;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-top: 5%;
+}
+
+.purchase {
+    justify-content: center;
+    display: flex;
 }

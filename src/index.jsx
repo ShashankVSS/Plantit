@@ -44,6 +44,7 @@ class App extends React.Component {
 		this.login = this.login.bind(this);
 		this.register = this.register.bind(this);
 		this.upload = this.upload.bind(this);
+		this.getAll = this.getAll.bind(this);
 	}
 
 	componentDidMount() {
@@ -88,20 +89,40 @@ class App extends React.Component {
 	}
 
 	async upload(state) {
-   		const base64 = await getBase64(state.file);
-		console.log(base64);
+   		const img = await getBase64(state.file);
+		const img2 = await getBase64(state.file2);
+		
 		fetch(`http://${window.location.hostname}:3000/api/data/upload`, {
 			method: 'POST',
 			headers: {
 				'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZDZmNmNiNzhhZjEyMWNjYzE5NDdlOCIsImlhdCI6MTYyNDcwMDgzOCwiZXhwIjoxNjI0Nzg3MjM4fQ.JnlN96kz0JbTgMnC2DJNSv-RHgLjC_RPkTtQpnowJlM',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({data: '1', image_data: base64, image_data2: '1', latitude: '1', longitude: '1'})
+			body: JSON.stringify({
+				data: state.description,
+				image_data: img,
+				image_data2: '1',
+				latitude: state.lat,
+				longitude: state.lon,
+				latitude2: state.lat2,
+				longitude2: state.lon2
+			})
 		})
 		.then(response => response.json())
 		.then(result => {
-			console.log(result);
+			this.setPage('home');
 		});
+	}
+
+	async getAll() {
+		let response = await fetch(`http://${window.location.hostname}:3000/api/data/get_all`, {
+			method: 'GET',
+			headers: {
+				'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZDZmNmNiNzhhZjEyMWNjYzE5NDdlOCIsImlhdCI6MTYyNDcwMDgzOCwiZXhwIjoxNjI0Nzg3MjM4fQ.JnlN96kz0JbTgMnC2DJNSv-RHgLjC_RPkTtQpnowJlM'
+			}
+		})
+		let result = await response.json();
+		return result;
 	}
 	
 	render() {
@@ -118,7 +139,7 @@ class App extends React.Component {
 				</div>}
 				{ this.state.page === 'login' && <Login setPage={this.setPage} login={this.login}/> }
 				{ this.state.page === 'register' && <Register setPage={this.setPage} register={this.register}/> }
-        		{ this.state.page === 'home' && <Home setPage={this.setPage} /> }
+        		{ this.state.page === 'home' && <Home setPage={this.setPage} getAll={this.getAll}/> }
 				{ this.state.page === 'notification' && <Notification setPage={this.setPage} /> }
 				{ this.state.page === 'photos' && <Photos setPage={this.setPage} upload={this.upload}/> }
 				{ this.state.page === 'planparty' && <PlanParty setPage={this.setPage} /> }

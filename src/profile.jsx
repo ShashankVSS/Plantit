@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 import './profile.css';
 import NavDrawer from './navDrawer';
 import testprofile from './imgs/testprofile.png'
@@ -8,7 +8,7 @@ class Profile extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-	
+
 	render() {
 		return(
       		<div id="profile">
@@ -16,14 +16,16 @@ class Profile extends React.Component {
 				<NavDrawer page="Profile" setPage={this.props.setPage}/>
 				
 				<div id="profile-card">
-					<img src={testprofile} alt="" />
-                    <div id="username">
-                        Mr. ooga booga
-                    </div>
+					<img src={this.props.userImage} alt="" />
+                    <div>
+					<Typography variant="h5" id="username">
+                        {this.props.userName}
+                    </Typography>
 
-                    <div id="score">
-                        default
-                    </div>
+                    <Typography variant="h5" id="score">
+                        {this.props.userPoints}
+                    </Typography>
+					</div>
 
 				</div>
 				<Button className="redeem" variant="contained" size="large" color="primary" onClick={() => this.props.setPage('store')}> Redeem </Button>
@@ -31,5 +33,6 @@ class Profile extends React.Component {
 		);
 	}
 }
+Profile.defaultProps = {userName: "Mr.Ooga Booga", userPoints: 76547643, stars: "0", userImage: testprofile};
 
 export default Profile;

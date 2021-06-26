@@ -80,6 +80,8 @@ module.exports = function (app, blob_client) {
                     imagePath2: image_data2,
                     latitude: req.body.latitude,
                     longitude: req.body.longitude,
+                    latitude2: req.body.latitude2,
+                    longitude2: req.body.longitude2,
                     user: req.user_id
                 });
 
