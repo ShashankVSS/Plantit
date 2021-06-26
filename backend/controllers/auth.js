@@ -16,12 +16,17 @@ exports.signup = (req, res) => {
             res.status(500).send({ message: err });
             return;
         }
-    });
-    res.status(200).send({message: "User registered successfully."});
+        else {
+            res.status(200).send({message: "User registered successfully."});
+        }
+    });    
 
 };
 
 exports.signin = (req, res) => {
+
+    console.log("BOB");
+
     User.findOne({
         email: req.body.email
     }).exec((err, user) => {

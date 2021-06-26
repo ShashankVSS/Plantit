@@ -9,12 +9,8 @@ module.exports = function (app) {
         next();
     });
 
-    app.get("/api/test/all", (req, res) => {
-        res.send("All");
-    });
-
     app.get("/api/test/user", [auth_jwt.verifyToken], (req, res) => {
-        res.send("User");
+        res.status(200).send(req.user_id);                
     });
    
 };

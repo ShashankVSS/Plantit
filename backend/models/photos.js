@@ -9,10 +9,18 @@ const image_schema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
-  },  
+  },
   imagePath: {
-    tpye: String,
-    required: false
+    type: String,
+    required: true
+  },
+  latitude: {
+    type: String,
+    required: true
+  },
+  longitude: {
+    type: String,
+    required: true
   },
   date: {
     type: Date,
