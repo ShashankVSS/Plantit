@@ -6,10 +6,22 @@
 }
 
 .partiecards {
-	width: 80%;
+	width: calc(100% - 24px);
+	margin: 12px;
+	border-radius: 35px;
 }
 
 .img-container {
-	height: 200px;
+	height: 150px;
 	width: 100%;
+}
+
+.createprty {
+	width: calc(100% - 24px);
+	margin: 80px 12px !important;
+
+}
+
+#cards {
+	height: 70%;
 }

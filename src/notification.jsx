@@ -4,7 +4,8 @@ import NavDrawer from './navDrawer';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import {Typography} from '@material-ui/core'
+import CardActionArea from '@material-ui/core/CardActionArea';
+import {Typography, Button} from '@material-ui/core'
 import partieimg from './imgs/maptest.png'
 
 class Notification extends React.Component {
@@ -18,7 +19,9 @@ class Notification extends React.Component {
 		return(
       		<div id="notification">
 				<NavDrawer page="Parties" setPage={this.props.setPage}/>
+				<div id="cards">
 				<Card className="partiecards">
+					<CardActionArea>
 					<CardContent>
 					<Typography variant="body2" color="textSecondary" component="p">
 						Lizards are a widespread group of squamate reptiles
@@ -27,10 +30,11 @@ class Notification extends React.Component {
 					<CardMedia>
 						<img src={partieimg} className="img-container"/>
 					</CardMedia>
+					</CardActionArea>
 				</Card>
+				</div>
 
-
-				<button>Make a Party</button>
+				<Button className="redeem" variant="contained" size="large" color="primary"> Make A Party </Button>
 			</div>
 		);
 	}

@@ -7,7 +7,7 @@ import logo from './imgs/logofull.png';
 class Register extends React.Component {
 	constructor(props) {
 		super(props);
-        this.state = {email: '', pass: '', veriPass: true};
+        this.state = {email: '', pass: '', pass2: '', veriPass: true};
 
         this.updateEmail = this.updateEmail.bind(this);
 		this.updatePass = this.updatePass.bind(this);
@@ -24,7 +24,7 @@ class Register extends React.Component {
 
     updateVerPas(e) {
 		if (e.target.value === this.state.pass) this.setState({veriPass: true});
-		else this.setState({veriPass: false});
+		else this.setState({pass2: e.target.value, veriPass: false});
 	}
 	
 	render() {
@@ -33,10 +33,11 @@ class Register extends React.Component {
 				<img src={logo} alt="" id="logofull"/>
 				<div id="register-card">
 					<TextField variant="outlined" label="Email" margin="normal" onChange={this.updateEmail}/>
-					<TextField variant="outlined" label="Password" margin="normal" onChange={this.updatePass}/>
-					<TextField variant="outlined" label="Verify Password" margin="normal" onChange={this.updateVerPas} error={!this.state.veriPass}/>
+					<TextField variant="outlined" label="Password" type="password" margin="normal" onChange={this.updatePass}/>
+					<TextField variant="outlined" label="Verify Password" type="password" margin="normal" onChange={this.updateVerPas} error={!this.state.veriPass}/>
 					<Divider className="divider"/>
-					<Button variant="contained" fullWidth size="large" color="primary" disabled={!this.state.veriPass}
+					<Button variant="contained" fullWidth size="large" color="primary"
+						disabled={!this.state.veriPass || !this.state.pass || !this.state.pass2}
 						onClick={() => this.props.register(this.state)}
 					>
 						Register
