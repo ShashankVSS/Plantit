@@ -25,17 +25,17 @@ module.exports = function (app, blob_client) {
                 return res.status(200).send(docs);
             }
             else {
-                return res.status(400).send({message: "An error occured"});
+                return res.status(400).send({ message: "An error occured" });
             }
 
         });
 
     });
-    
-    app.get('/api/data/get_all', [auth_jwt.verifyToken], (req, res) => {
-        
 
-        Photos.find({            
+    app.get('/api/data/get_all', [auth_jwt.verifyToken], (req, res) => {
+
+
+        Photos.find({
         }, (err, docs) => {
 
             if (!err) {
@@ -43,7 +43,7 @@ module.exports = function (app, blob_client) {
                 return res.status(200).send(docs);
             }
             else {
-                return res.status(400).send({message: "An error occured"});
+                return res.status(400).send({ message: "An error occured" });
             }
 
         });
@@ -63,38 +63,45 @@ module.exports = function (app, blob_client) {
 
             // Create a unique name for the blob
             const blobName = uuidv1() + '.png';
+            const blobName2 = uuidv1() + '.png';
+
             // Get a block blob client
             const blockBlobClient = blob_client.getBlockBlobClient(blobName);
+            const blockBlobClient2 = blob_client.getBlockBlobClient(blobName2);
 
             var new_data = image_data.replace(/^data:image\/(png|jpg);base64,/, "");
             let buff = Buffer.from(new_data, 'base64');
 
-            const uploadBlobResponse = blockBlobClient.upload(buff, buff.length).then((a, b) => {
+            var new_data2 = image_data2.replace(/^data:image\/(png|jpg);base64,/, "");
+            let buff2 = Buffer.from(new_data2, 'base64');
 
-                console.log(blockBlobClient);
+            const blobOptions = { blobHTTPHeaders: { blobContentType: 'image/png' } };
 
-                const data = new Photos({
-                    data: req.body.data,
-                    user: req.user,
-                    imagePath: image_data,
-                    imagePath2: image_data2,
-                    latitude: req.body.latitude,
-                    longitude: req.body.longitude,
-                    user: req.user_id
-                });
+            const uploadBlobResponse = blockBlobClient.upload(buff, buff.length, blobOptions).then((a, b) => {
 
-                data.save((err, data) => {
-                    if (err) {
-                        return res.status(500).send({ message: err });
-                    }
-                    else {
-                        return res.status(200).send({ message: "Data uploaded successfully." });
-                    }
-                });
+                const uploadBlobResponse2 = blockBlobClient2.upload(buff2, buff2.length, blobOptions).then((a, b) => {
+                    
+                    const data = new Photos({
+                        data: req.body.data,
+                        user: req.user,
+                        imagePath: blockBlobClient.url,
+                        imagePath2: blockBlobClient2.url,
+                        latitude: req.body.latitude,
+                        longitude: req.body.longitude,
+                        user: req.user_id
+                    });
 
-            });
-            console.log("Blob was uploaded successfully. requestId: ", uploadBlobResponse);
+                    data.save((err, data) => {
+                        if (err) {
+                            return res.status(500).send({ message: err });
+                        }
+                        else {
+                            return res.status(200).send({ message: "Data uploaded successfully." });
+                        }
+                    });
 
+                })
+            });            
 
         }
 
