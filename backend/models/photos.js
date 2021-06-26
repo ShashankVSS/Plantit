@@ -24,7 +24,7 @@ const image_schema = new mongoose.Schema({
   },
   longitude: {
     type: String,
-    required: true
+    required: false
   },
   latitude2: {
     type: String,

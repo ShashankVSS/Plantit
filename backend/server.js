@@ -14,6 +14,7 @@ app.use(cors());
 // Load routes
 require('./routes/user')(app);
 require('./routes/auth')(app);
+require('./routes/party')(app);
 require('./routes/data')(app, blob_client);
 
 // set port, listen for requests

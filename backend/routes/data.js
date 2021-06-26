@@ -1,5 +1,6 @@
 const auth_jwt = require("../middlewares/auth_jwt");
 const Photos = require('../models/photos');
+const Party = require('../models/party');
 const { v1: uuidv1 } = require('uuid');
 
 module.exports = function (app, blob_client) {
@@ -25,17 +26,17 @@ module.exports = function (app, blob_client) {
                 return res.status(200).send(docs);
             }
             else {
-                return res.status(400).send({message: "An error occured"});
+                return res.status(400).send({ message: "An error occured" });
             }
 
         });
 
     });
-    
-    app.get('/api/data/get_all', [auth_jwt.verifyToken], (req, res) => {
-        
 
-        Photos.find({            
+    app.get('/api/data/get_all', [auth_jwt.verifyToken], (req, res) => {
+
+
+        Photos.find({
         }, (err, docs) => {
 
             if (!err) {
@@ -43,7 +44,7 @@ module.exports = function (app, blob_client) {
                 return res.status(200).send(docs);
             }
             else {
-                return res.status(400).send({message: "An error occured"});
+                return res.status(400).send({ message: "An error occured" });
             }
 
         });
@@ -63,8 +64,11 @@ module.exports = function (app, blob_client) {
 
             // Create a unique name for the blob
             const blobName = uuidv1() + '.png';
+            const blobName2 = uuidv1() + '.png';
+
             // Get a block blob client
             const blockBlobClient = blob_client.getBlockBlobClient(blobName);
+            const blockBlobClient2 = blob_client.getBlockBlobClient(blobName2);
 
             var new_data = image_data.replace(/^data:image\/(png|jpg);base64,/, "");
             let buff = Buffer.from(new_data, 'base64');
