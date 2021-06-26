@@ -1,5 +1,15 @@
-
+#home {
+	background: url('imgs/bg.png');
+	background-size: cover;
+	height: 100vh;
+}
 
 .map-container {
-    height: 400px;
-    }
+    height: 670px;
+    width: calc(100% - 24px);
+    padding: 24px 12px;
+}
+
+.mapboxgl-canvas {
+    border-radius: 8px;
+}

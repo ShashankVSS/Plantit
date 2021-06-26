@@ -1,12 +1,13 @@
-#register {
-    background: url('imgs/loginbg.png');
+#plantparty {
+    background: url('imgs/bg.png');
     background-size: cover;
     height: 100vh;
 }
 
-#register-card {
+.partyCard {
     background: rgba(255, 255, 255, 0.4);
 	border-radius: 16px;
-    margin: 0 16px;
+    margin: 20px 16px;
     padding: 30px;
+    height: 70%;
 }
