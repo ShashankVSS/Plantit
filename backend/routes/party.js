@@ -22,17 +22,16 @@ module.exports = function (app) {
             return res.status(400).send({message:"Party ID not provided."});
         }
         else {
-            console.log(party_id);
+            // console.log(party_id);
             Party.findOne({'_id':party_id}, (err, result) => {
                 if (err){
                     return res.status(400).send({message:"Party ID not found."});
-                }
-                console.log(result.users);
+                }                
                 const found = result.users.find(element => element == req.user_id);
                 if (found == undefined) {
                     result.users.push(req.user_id);
                     result.save();
-                    return res.status(200).send({message:"Party joined successfully"});
+                    return res.status(200).send({message:"Party joined successfully."});
                 }
                 else {
                     return res.status(400).send({message:"User has already joined the party."});

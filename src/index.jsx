@@ -56,7 +56,7 @@ class App extends React.Component {
 	}
 
 	async login(state) {
-		console.log();
+		// console.log();
 		fetch(`http://${window.location.hostname}:3000/api/auth/signin`, {
 			method: 'POST',
 			headers: {

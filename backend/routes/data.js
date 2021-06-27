@@ -22,7 +22,7 @@ module.exports = function (app, blob_client) {
         }, (err, docs) => {
 
             if (!err) {
-                console.log(docs);
+                // console.log(docs);
                 return res.status(200).send(docs);
             }
             else {
@@ -40,7 +40,7 @@ module.exports = function (app, blob_client) {
         }, (err, docs) => {
 
             if (!err) {
-                console.log(docs);
+                // console.log(docs);
                 return res.status(200).send(docs);
             }
             else {
@@ -73,34 +73,44 @@ module.exports = function (app, blob_client) {
             var new_data = image_data.replace(/^data:image\/(png|jpg);base64,/, "");
             let buff = Buffer.from(new_data, 'base64');
 
-            const uploadBlobResponse = blockBlobClient.upload(buff, buff.length).then((a, b) => {
+            var new_data2 = image_data2.replace(/^data:image\/(png|jpg);base64,/, "");
+            let buff2 = Buffer.from(new_data2, 'base64');
 
-                console.log(blockBlobClient);
+            const blobOptions = { blobHTTPHeaders: { blobContentType: 'image/png' } };
 
-                const data = new Photos({
-                    data: req.body.data,
-                    user: req.user,
-                    imagePath: image_data,
-                    imagePath2: image_data2,
-                    latitude: req.body.latitude,
-                    longitude: req.body.longitude,
-                    latitude2: req.body.latitude2,
-                    longitude2: req.body.longitude2,
-                    user: req.user_id
-                });
+            const uploadBlobResponse = blockBlobClient.upload(buff, buff.length, blobOptions).then((a, b) => {
 
-                data.save((err, data) => {
-                    if (err) {
-                        return res.status(500).send({ message: err });
-                    }
-                    else {
-                        return res.status(200).send({ message: "Data uploaded successfully." });
-                    }
-                });
+                const uploadBlobResponse2 = blockBlobClient2.upload(buff2, buff2.length, blobOptions).then((a, b) => {
 
+                    const data = new Photos({
+                        data: req.body.data,
+                        user: req.user,
+                        imagePath: blockBlobClient.url,
+                        imagePath2: blockBlobClient2.url,
+                        latitude: req.body.latitude,
+                        longitude: req.body.longitude,
+                        latitude2: req.body.latitude2,
+                        longitude2: req.body.longitude2,
+                        user: req.user_id
+                    });
+
+                    const party = new Party({
+                        name: "Kitty Party",
+                        photos: data._id
+                    });  
+
+                    data.save((err, data) => {
+                        if (err) {
+                            return res.status(500).send({ message: err });
+                        }
+                        else {
+                            party.save((a,b)=>{});
+                            return res.status(200).send({ message: "Data uploaded successfully." });
+                        }
+                    });
+
+                })
             });
-            console.log("Blob was uploaded successfully. requestId: ", uploadBlobResponse);
-
 
         }
 
