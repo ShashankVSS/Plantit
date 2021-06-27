@@ -41,5 +41,5 @@
 .map-container3 {
     height: 150px !important;
     width: calc(100% - 12px);
-    padding: 10px 6px;
+    margin: 10px 6px;
 }

@@ -6,7 +6,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import {Typography, Button} from '@material-ui/core'
-import partieimg from './imgs/maptest.png'
+import partieimg from './imgs/grass.jfif'
+import partieimg1 from './imgs/roadold.jpg'
+import partieimg2 from './imgs/treespond.jpg'
 
 class Notification extends React.Component {
 	constructor(props) {
@@ -24,11 +26,35 @@ class Notification extends React.Component {
 					<CardActionArea>
 					<CardContent>
 					<Typography variant="body2" color="textSecondary" component="p">
-						Lizards are a widespread group of squamate reptiles
+						Clear area that is in need of more trees! 🌳
 					</Typography>
 					</CardContent>
 					<CardMedia>
 						<img src={partieimg} className="img-container"/>
+					</CardMedia>
+					</CardActionArea>
+				</Card>
+				<Card className="partiecards">
+					<CardActionArea>
+					<CardContent>
+					<Typography variant="body2" color="textSecondary" component="p">
+						This road could use some new trees.
+					</Typography>
+					</CardContent>
+					<CardMedia>
+						<img src={partieimg1} className="img-container"/>
+					</CardMedia>
+					</CardActionArea>
+				</Card>
+				<Card className="partiecards">
+					<CardActionArea>
+					<CardContent>
+					<Typography variant="body2" color="textSecondary" component="p">
+						Who wants to come revitalize this old park!
+					</Typography>
+					</CardContent>
+					<CardMedia>
+						<img src={partieimg2} className="img-container"/>
 					</CardMedia>
 					</CardActionArea>
 				</Card>

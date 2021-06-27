@@ -30,7 +30,7 @@ function getBase64(file) {
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
 		reader.readAsDataURL(file);
-		reader.onload = () => resolve(reader.result);
+		reader.onloadend = () => resolve(reader.result);
 		reader.onerror = error => reject(error);
 	});
 }
@@ -45,6 +45,7 @@ class App extends React.Component {
 		this.register = this.register.bind(this);
 		this.upload = this.upload.bind(this);
 		this.getAll = this.getAll.bind(this);
+		this.setCoord = this.setCoord.bind(this);
 	}
 
 	componentDidMount() {
@@ -55,9 +56,13 @@ class App extends React.Component {
 		this.setState({page: page});
 	}
 
+	setCoord(a, b, c, d){
+		this.setState({lat: a, lon: b, lat2: c, lon2: d})
+	}
+
 	async login(state) {
 		console.log();
-		fetch(`https://15b9513cf4ed.ngrok.io/api/auth/signin`, {
+		fetch(`http://${window.location.hostname}:3000/api/auth/signin`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -73,7 +78,7 @@ class App extends React.Component {
 	}
 
 	async register(state) {
-		fetch(`https://15b9513cf4ed.ngrok.io/api/auth/signup`, {
+		fetch(`http://${window.location.hostname}:3000/api/auth/signup`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -89,10 +94,26 @@ class App extends React.Component {
 	}
 
 	async upload(state) {
+		console.log(state.file);
+		/*var input, file, fr, img;
+	
+		fr = new FileReader();
+		fr.onload = () => {
+			img = new Image();
+			img.onload = () => {
+				var canvas = document.getElementById('canvas');
+				canvas.width = img.width;
+				canvas.height = img.height;
+				var ctx = canvas.getContext("2d");
+				ctx.drawImage(img,0,0);
+				canvas.toDataURL("image/png");
+			}
+			img.src = fr.result;
+		};
+		fr.readAsDataURL(state.file);*/
    		const img = await getBase64(state.file);
-		const img2 = await getBase64(state.file2);
 		
-		fetch(`https://15b9513cf4ed.ngrok.io/api/data/upload`, {
+		fetch(`http://${window.location.hostname}:3000/api/data/upload`, {
 			method: 'POST',
 			headers: {
 				'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZDZmNmNiNzhhZjEyMWNjYzE5NDdlOCIsImlhdCI6MTYyNDcwMDgzOCwiZXhwIjoxNjI0Nzg3MjM4fQ.JnlN96kz0JbTgMnC2DJNSv-RHgLjC_RPkTtQpnowJlM',
@@ -115,7 +136,7 @@ class App extends React.Component {
 	}
 
 	async getAll() {
-		let response = await fetch(`https://15b9513cf4ed.ngrok.io/api/data/get_all`, {
+		let response = await fetch(`http://${window.location.hostname}:3000/api/data/get_all`, {
 			method: 'GET',
 			headers: {
 				'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZDZmNmNiNzhhZjEyMWNjYzE5NDdlOCIsImlhdCI6MTYyNDcwMDgzOCwiZXhwIjoxNjI0Nzg3MjM4fQ.JnlN96kz0JbTgMnC2DJNSv-RHgLjC_RPkTtQpnowJlM'
@@ -139,10 +160,10 @@ class App extends React.Component {
 				</div>}
 				{ this.state.page === 'login' && <Login setPage={this.setPage} login={this.login}/> }
 				{ this.state.page === 'register' && <Register setPage={this.setPage} register={this.register}/> }
-        		{ this.state.page === 'home' && <Home setPage={this.setPage} getAll={this.getAll}/> }
+        		{ this.state.page === 'home' && <Home setPage={this.setPage} getAll={this.getAll} lat={this.state.lat} lon={this.state.lon} lat2={this.state.lat2} lon2={this.state.lon2}/> }
 				{ this.state.page === 'notification' && <Notification setPage={this.setPage} /> }
-				{ this.state.page === 'photos' && <Photos setPage={this.setPage} upload={this.upload}/> }
-				{ this.state.page === 'planparty' && <PlanParty setPage={this.setPage} /> }
+				{ this.state.page === 'photos' && <Photos setPage={this.setPage} upload={this.upload} setCoord={this.setCoord}/> }
+				{ this.state.page === 'planparty' && <PlanParty setPage={this.setPage} getAll={this.getAll} lat={this.state.lat} lon={this.state.lon} lat2={this.state.lat2} lon2={this.state.lon2}/> }
 				{ this.state.page === 'profile' && <Profile setPage={this.setPage} /> }
 				{ this.state.page === 'store' && <Store setPage={this.setPage} /> }
 			</MuiThemeProvider>

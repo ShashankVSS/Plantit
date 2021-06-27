@@ -18,7 +18,7 @@ class Profile extends React.Component {
 				<NavDrawer page="Profile" setPage={this.props.setPage}/>
 				
 				<div id="profile-card">
-					<img src={this.props.userImage} alt="" />
+					<img src={this.props.userImage} className="userimg" />
                     <div>
 					<Typography variant="h5" id="username">
                         {this.props.userName}
@@ -28,7 +28,6 @@ class Profile extends React.Component {
                         {this.props.userPoints}
                     </Typography>
 
-					<img src="{stars}"/>
 
 
 					</div>

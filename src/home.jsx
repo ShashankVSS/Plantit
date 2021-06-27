@@ -15,7 +15,7 @@ class Home extends React.Component {
 	}
 
     componentDidMount() {
-        const { lng, lat, zoom } = {lng: -117.5443667, lat: 33.8354925, zoom: 9};
+        const { lng, lat, zoom } = {lng: -79.685001, lat: 43.789044, zoom: 12};
         const map = new mapboxgl.Map({
 			container: this.mapContainer.current,
 			style: 'mapbox://styles/mapbox/streets-v11',
@@ -33,7 +33,7 @@ class Home extends React.Component {
 			if (all) {
 				all.forEach(marker => {
 				new mapboxgl.Marker()
-					.setLngLat([parseInt(marker.longitude), parseInt(marker.latitude)])
+					.setLngLat([parseFloat(marker.longitude), parseFloat(marker.latitude)])
 					.setPopup(
 					new mapboxgl.Popup({ offset: 25 }) // add popups
 						.setHTML(
@@ -44,6 +44,10 @@ class Home extends React.Component {
 					)
 					.addTo(map);
 				});
+			}
+			if (this.props.lon) {
+			new mapboxgl.Marker().setLngLat([parseFloat(this.props.lon), parseFloat(this.props.lat)]).addTo(map);
+			new mapboxgl.Marker().setLngLat([parseFloat(this.props.lon2), parseFloat(this.props.lat2)]).addTo(map);
 			}
 		});
     }

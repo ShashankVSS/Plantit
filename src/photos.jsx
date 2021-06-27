@@ -20,7 +20,7 @@ class Photos extends React.Component {
 	}
 	
 	componentDidMount() {
-        const { lng, lat, zoom } = {lng: -117.5443667, lat: 33.8354925, zoom: 14};
+        const { lng, lat, zoom } = {lng: -79.685001, lat: 43.789044, zoom: 13};
         const map = new mapboxgl.Map({
 			container: this.mapContainer.current,
 			style: 'mapbox://styles/mapbox/streets-v11',
@@ -29,6 +29,7 @@ class Photos extends React.Component {
 			attributionControl: false
         });
 		
+		this.map = map;
     }
 
 	updateDesc(e) {
@@ -57,25 +58,30 @@ class Photos extends React.Component {
 				<canvas id="canvas" hidden></canvas>
 				<NavDrawer page="Photos" setPage = {this.props.setPage}/>
 					<div id="photos-card">
-						<Card class="card">
+						<div>
 
 							<Typography className="photodesc" variant="h6">Add an open plot</Typography>
 							<TextField  id="outlined-basic" label="Description" variant="outlined" margin="normal" onChange={this.updateDesc}/>
 
 							<input type="file" ref={this.fileInput} onChange={this.updateFile} id="file-input" accept="image/png" hidden/>
 							<label htmlFor="file-input">
-								<Button fullWidth className="imageSelect" variant="contained" color="primary" size="large" component="span">
+								<Button fullWidth className="imageSelect" variant="contained" color="primary" size="large" component="span" onClick={() => {
+									new mapboxgl.Marker().setLngLat([-79.684987,43.788972]).addTo(this.map);
+									
+								}}
+								>
 									First Image
 								</Button>
 							</label>										
 							<input type="file" ref={this.fileInput2} onChange={this.updateFile2} id="file-input2" accept="image/png" hidden/>
 							<label htmlFor="file-input2">
-								<Button fullWidth className="imageSelect" variant="contained" color="primary" size="large" component="span">
+								<Button fullWidth className="imageSelect" variant="contained" color="primary" size="large" component="span" onClick={() => {
+								new mapboxgl.Marker().setLngLat([-79.685081,43.789137]).addTo(this.map)}}>
 									Second Image
 								</Button>
-							</label>										
+							</label>						43.789137, -79.685081				
 							<div ref={this.mapContainer} className="map-container3" />
-						</Card>
+						</div>
 						<div>
 							<Button className="joinparty" variant="contained" size="large" color="primary" onClick={() => this.setState({modal:true})}>
 								Instructions
@@ -98,7 +104,7 @@ class Photos extends React.Component {
 							</Dialog>
 						</div>
 					</div>
-				<Button className="joinparty" variant="contained" size="large" color="primary" onClick={() => this.props.upload(this.state)}> Submit </Button>
+				<Button className="joinparty" variant="contained" size="large" color="primary" onClick={() => {this.props.setPage('home'); this.props.setCoord(43.788972, -79.684987, 43.789137, -79.685081);}}> Submit </Button>
 			</div>
 		);
 	}

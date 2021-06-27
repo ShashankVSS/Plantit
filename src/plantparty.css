@@ -8,7 +8,7 @@
 .partyCard {
     background: rgba(255, 255, 255, 0.4);
 	border-radius: 16px;
-    margin: 20px 16px;
+    margin: 10px 16px;
     padding: 30px;
     height: 70%;
 }
@@ -21,10 +21,18 @@
 .map-container2 {
     height: 420px;
     width: calc(100% - 12px);
-    padding: 24px 6px;
+    margin: 10px 6px;
 }
 
 .joinparty {
     width: calc(100% - 24px);
 	margin: 40px 12px !important;
+}
+
+.mapboxgl-marker {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border:1px solid gray;
+    background-color:lightblue;
 }
