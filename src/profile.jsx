@@ -2,7 +2,9 @@ import React from 'react';
 import { Button, Typography } from '@material-ui/core'
 import './profile.css';
 import NavDrawer from './navDrawer';
-import testprofile from './imgs/testprofile.png'
+import testprofile from './imgs/testprofile.png';
+import stars from './imgs/1200px-Golden_star.svg.png';
+
 
 class Profile extends React.Component {
 	constructor(props) {
@@ -25,6 +27,10 @@ class Profile extends React.Component {
                     <Typography variant="h5" id="score">
                         {this.props.userPoints}
                     </Typography>
+
+					<img src="{stars}"/>
+
+
 					</div>
 
 				</div>

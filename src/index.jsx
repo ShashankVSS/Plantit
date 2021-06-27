@@ -56,8 +56,8 @@ class App extends React.Component {
 	}
 
 	async login(state) {
-		// console.log();
-		fetch(`http://${window.location.hostname}:3000/api/auth/signin`, {
+		console.log();
+		fetch(`https://15b9513cf4ed.ngrok.io/api/auth/signin`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ class App extends React.Component {
 	}
 
 	async register(state) {
-		fetch(`http://${window.location.hostname}:3000/api/auth/signup`, {
+		fetch(`https://15b9513cf4ed.ngrok.io/api/auth/signup`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ class App extends React.Component {
    		const img = await getBase64(state.file);
 		const img2 = await getBase64(state.file2);
 		
-		fetch(`http://${window.location.hostname}:3000/api/data/upload`, {
+		fetch(`https://15b9513cf4ed.ngrok.io/api/data/upload`, {
 			method: 'POST',
 			headers: {
 				'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZDZmNmNiNzhhZjEyMWNjYzE5NDdlOCIsImlhdCI6MTYyNDcwMDgzOCwiZXhwIjoxNjI0Nzg3MjM4fQ.JnlN96kz0JbTgMnC2DJNSv-RHgLjC_RPkTtQpnowJlM',
@@ -115,7 +115,7 @@ class App extends React.Component {
 	}
 
 	async getAll() {
-		let response = await fetch(`http://${window.location.hostname}:3000/api/data/get_all`, {
+		let response = await fetch(`https://15b9513cf4ed.ngrok.io/api/data/get_all`, {
 			method: 'GET',
 			headers: {
 				'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZDZmNmNiNzhhZjEyMWNjYzE5NDdlOCIsImlhdCI6MTYyNDcwMDgzOCwiZXhwIjoxNjI0Nzg3MjM4fQ.JnlN96kz0JbTgMnC2DJNSv-RHgLjC_RPkTtQpnowJlM'
